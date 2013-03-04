@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+  <head>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>OpenStreetMap Argentina</title>
+    <script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js"></script>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.css" />
+    <link rel="stylesheet" href="js/Zoomslider/L.Control.Zoomslider.css" />
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.ie.css" />
+    <![endif]-->
+
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <style>.leaflet-top{top:70px;}
+    #resultados{}
+    </style>
+</head>
+<body>
+    <!-- Begin page content -->
+
+    <div style="background: white; width:100%; position:absolute; z-index:10;">
+        <div class="btn-group pull-right" style="margin:10px;">
+ 
+              <button class="btn btn-" data-toggle="tooltip" title="Foro de discusión de la comunidad"><i class="icon-comment"></i>&nbsp;<a href="http://forum.openstreetmap.org/viewforum.php?id=49" target="_blank">Foro</a></button>
+              <button class="btn btn-" data-toggle="tooltip" title="Participá via e-mail"><i class="icon-envelope"></i>&nbsp;<a href="http://lists.openstreetmap.org/listinfo/talk-ar" target="_blank">Lista de correo</a></button>
+              <button class="btn btn-" data-toggle="tooltip" title="Documentación"><i class="icon-edit"></i>&nbsp;<a href="http://wiki.openstreetmap.org/wiki/WikiProject_Argentina" target="_blank">Wiki</a></button>
+              <button class="btn btn-" data-toggle="tooltip" title="Metete al chat ;)"><i class="icon-comment"></i>&nbsp;<a href="http://irc2go.com/webchat/?net=OFTC&room=osm-ar" target="_blank">IRC</a></button>
+              <button class="btn btn-" data-toggle="tooltip" title="Novedades y artículos"><i class="icon-book"></i>&nbsp;<a href="http://truemaps.net/osm/" target="_blank">Blog</a></button>
+              <button class="btn btn-" data-toggle="tooltip" title="Organización de tareas colaborativas"><i class="icon-list"></i>&nbsp;<a href="http://tareas.openstreetmap.org.ar" target="_blank">Tareas</a></button>
+
+        </div>
+        <div class="form-search pull-right" id="buscador" style="margin:10px;">
+            <input type="text" class="input-medium search-query" name="addr" value="" id="addr" size="10" >
+            <button type="submit" class="btn" class="btn" id="buscar">Buscar</button>
+        </div>
+
+        <h3 style="margin:10px;">OpenStreetMap Argentina <span class="label label-inverse">Beta</span></h3>
+
+      </div>
+    
+    <div id="modal-resultados" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Resultados" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Resultados</h3>
+      </div>
+      <div class="modal-body" id="resultados">
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+      </div>
+    </div>
+    <div id="map" style="z-index:1">
+    </div>
+
+
+
+    <script src="js/Zoomslider/L.Control.Zoomslider.js" ></script>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/mapa.js"></script>
+</body>
+</html>
+
