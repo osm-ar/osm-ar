@@ -5,6 +5,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>OpenStreetMap Argentina</title>
     <script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js"></script>
+    <script src="js/control/Permalink.js"></script>
+    <script src="js/control/Permalink.Marker.js"></script>
+    <script src="js/control/Permalink.Layer.js"></script>
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.css" />
     <link rel="stylesheet" href="js/Zoomslider/L.Control.Zoomslider.css" />
     <!--[if lte IE 8]>
@@ -15,6 +18,8 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
     <style>.leaflet-top{top:70px;}
+    .leaflet-bottom{bottom:15px;}
+    .l10{left:10px;}
     #resultados{}
     </style>
 </head>
@@ -23,17 +28,32 @@
 
     <div style="background: white; width:100%; position:absolute; z-index:10;">
         <div class="btn-group pull-right" style="margin:10px;">
- 
-              <button class="btn btn-" data-toggle="tooltip" title="Foro de discusión de la comunidad"><i class="icon-comment"></i>&nbsp;<a href="http://forum.openstreetmap.org/viewforum.php?id=49" target="_blank">Foro</a></button>
-              <button class="btn btn-" data-toggle="tooltip" title="Participá via e-mail"><i class="icon-envelope"></i>&nbsp;<a href="http://lists.openstreetmap.org/listinfo/talk-ar" target="_blank">Lista de correo</a></button>
-              <button class="btn btn-" data-toggle="tooltip" title="Documentación"><i class="icon-edit"></i>&nbsp;<a href="http://wiki.openstreetmap.org/wiki/WikiProject_Argentina" target="_blank">Wiki</a></button>
-              <button class="btn btn-" data-toggle="tooltip" title="Metete al chat ;)"><i class="icon-comment"></i>&nbsp;<a href="http://irc2go.com/webchat/?net=OFTC&room=osm-ar" target="_blank">IRC</a></button>
-              <button class="btn btn-" data-toggle="tooltip" title="Novedades y artículos"><i class="icon-book"></i>&nbsp;<a href="http://truemaps.net/osm/" target="_blank">Blog</a></button>
-              <button class="btn btn-" data-toggle="tooltip" title="Organización de tareas colaborativas"><i class="icon-list"></i>&nbsp;<a href="http://tareas.openstreetmap.org.ar" target="_blank">Tareas</a></button>
-
+          <a class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">Extras <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#" class="modal-garmin"><i class="icon-screenshot"></i> Mapa Garmin</a></li>
+            <li><a href="http://download.geofabrik.de/openstreetmap/south-america/" target="_blank"><i class="icon-download-alt"></i>&nbsp;Extracto de geofabrik</a></li>
+          </ul>
         </div>
-        <div class="form-search pull-right" id="buscador" style="margin:10px;">
-            <input type="text" class="input-medium search-query" name="addr" value="" id="addr" size="10" >
+        <div class="btn-group pull-right" style="margin:10px;">
+          <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#">Contacto <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a data-toggle="tooltip" title="Foro de discusión de la comunidad" href="http://forum.openstreetmap.org/viewforum.php?id=49" target="_blank"><i class="icon-comment"></i> Foro</a></li>
+            <li><a href="http://lists.openstreetmap.org/listinfo/talk-ar" target="_blank"><i class="icon-envelope"></i> Lista de correo</a></li>
+            <li><a href="http://irc.lc/OFTC/osm-ar/invitado" target="_blank"><i class="icon-comment"></i> IRC</a></li>
+            <!-- dropdown menu links -->
+          </ul>
+        </div>
+        <div class="btn-group pull-right" style="margin:10px;">
+          <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">Colaborar <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="http://wiki.openstreetmap.org/wiki/WikiProject_Argentina" target="_blank"><i class="icon-edit"></i> Wiki</a></li>
+            <li><a href="http://tareas.openstreetmap.org.ar" target="_blank"><i class="icon-list"></i>&nbsp;Tareas</a></li>
+            <li><a href="#" class="modal-acerca"><i><img src="img/github.png" alt="g"></i> Github Repo</a></li>
+          </ul>
+        </div>
+
+        <div class="input-append pull-right" id="buscador" style="margin:10px;">
+            <input type="text" class="input-medium span2" name="addr" value="" id="addr" size="10" >
             <button type="submit" class="btn" class="btn" id="buscar">Buscar</button>
         </div>
 
@@ -41,21 +61,45 @@
 
       </div>
     
+    <div id="map" style="z-index:1">
+    </div>
+
     <div id="modal-resultados" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Resultados" aria-hidden="true">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel">Resultados</h3>
       </div>
       <div class="modal-body" id="resultados">
+        <img src="/img/loading.gif" alt="Cargando">
       </div>
       <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
       </div>
     </div>
-    <div id="map" style="z-index:1">
+
+    <div id="modal-acerca" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Acerca de..." aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Repositorio de OpenStreetMap Argentina</h3>
+      </div>
+      <div class="modal-body" id="acercade">
+       
+        <div class="github-widget" data-repo="f3rnando/osm-ar"><img src="/img/loading.gif" alt="Cargando"/></div>
+      </div>
     </div>
 
-
+    <div id="modal-garmin" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Mapa Garmin" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Mapa ruteable para Garmin</h3>
+      </div>
+      <div class="modal-body" id="garmin">
+      <p>Mapa ruteable de la República Argentina y países limítrofes (Bolivia, región sur de Brasil, Chile, Paraguay y Uruguay), basado en datos generados a partir de OpenStreetMap, para dispositivos GPS Garmin. </p>
+      <h4>Descarga, POIs, instrucciones y novedades:</h4>
+      <a href="http://www.i-nis.com.ar/osm/garmin" target="_blank">http://www.i-nis.com.ar/osm/garmin</a>
+      <span class="label label-success">Actualización constante</span>
+      </div>
+    </div>
 
     <script src="js/Zoomslider/L.Control.Zoomslider.js" ></script>
     <script src="http://code.jquery.com/jquery.js"></script>

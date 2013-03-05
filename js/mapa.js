@@ -14,10 +14,13 @@ function cargar_mapa() {
 	    var osm = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		    attribution: '© Colaboradores de OpenStreetMap'
 	    });
+	    var ign = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		    attribution: '© Colaboradores de OpenStreetMap'
+	    });
 
       var baseLayers = {
           "OSM-Ar": osmar,
-          "OSM-Ar #2": osmar2,
+          "OSM-Ar #2 <span class='label label-info'>Beta</span>": osmar2,
           "OSM.org": osm
       };
 
@@ -27,15 +30,54 @@ function cargar_mapa() {
           layers: [osmar]
       });
 
-      L.control.layers(baseLayers).addTo(map);
+      var layers = L.control.layers(baseLayers);
+      map.addControl(layers);
+      map.addControl(new L.Control.Permalink({text: 'Permalink', layers: layers}));
 
 
 
 }
 
     $(document).ready(function (){
+     
+      $('.modal-garmin').bind('click',function(){
 
+            $('#modal-garmin').modal({show:true,backdrop:true});
 
+      });
+      
+      $('#webirc').bind('click',function(){
+            $('<div/>').modal({remote:'http://irc.lc/OFTC/osm-ar/invitadoweb'});
+
+      });
+
+      $('.modal-acerca').bind('click',function(){
+
+            $('#modal-acerca').modal({show:true,backdrop:true});
+
+		    $.ajax({
+			    url: 'https://api.github.com/repos/f3rnando/osm-ar',
+			    dataType: 'jsonp',
+
+			    success: function(results){
+				    var repo = results.data;
+
+				    var date = new Date(repo.pushed_at);
+				    var pushed_at = (date.getDate() + '-' + date.getMonth()+1) + '-' + date.getFullYear();
+
+			        $('.github-widget').html('');
+					$('.github-widget').append('<h4>Github Repo</h4><div><a class="repo" href="' + repo.url.replace('api.','').replace('repos/','') + '">' + repo.url.replace('api.','').replace('repos/','') + '</a></div>');
+                    $('.github-widget').append('<h5 class="">Watchers: <a class="badge watchers" href="' + repo.url.replace('api.','').replace('repos/','') + '/watchers">' + repo.watchers + '</a></h5>');
+                    $('.github-widget').append('<h5 class="">Forks: <a class="badge forks" href="' + repo.url.replace('api.','').replace('repos/','') + '/forks">' + repo.forks + '</a></h5>');
+					$('.github-widget').append('<div><a class="btn btn-inverse download" href="' + repo.url.replace('api.','').replace('repos/','') + '/zipball/master">Descargar en zip</a></div>');
+
+                    $('.github-widget').append('<p>Ultimo commit al branch <strong>master</strong> el día ' + pushed_at + '</p>');
+                    $('.github-widget').append('<p>Reportar problemas, sugerir mejoras: <a href="https://github.com/f3rnando/osm-ar/issues">https://github.com/f3rnando/osm-ar/issues</a></p>');
+					
+			    } 
+		    });
+            
+      });
 
       $('#buscar').bind('click',function(){
         $('#modal-resultados').modal({show:true,backdrop:false});
