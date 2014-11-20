@@ -17,7 +17,7 @@ function cargar_mapa() {
     map = new L.map('map', {
         center: [-34.723,-58.536],
         zoom: 10,
-        layers: [satelite, osmarh]
+        layers: [osmar]
     });
 
     var popup = L.popup().setContent('<p>i</p>'); 
