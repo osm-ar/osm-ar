@@ -1,9 +1,9 @@
 var map;
 var feature, osmar, osmarh, osmardev;
 function cargar_mapa() {
-    osmar = L.tileLayer('http://tiles.openstreetmap.com.ar/{s}/osm-ar/{z}/{x}/{y}.png', { attribution: 'Datos © Colaboradores de OpenStreetMap, Tiles de OSM-Ar'});
-    osmarh = L.tileLayer('http://tiles.openstreetmap.com.ar/{s}/osm-ar-dev/{z}/{x}/{y}.png', { attribution: 'Datos © Colaboradores de OpenStreetMap, Tiles de OSM-Ar #2'});
-    osmardev = L.tileLayer('http://tiles.openstreetmap.com.ar/{s}/osm-ar-dev/{z}/{x}/{y}.png', { attribution: 'Datos © Colaboradores de OpenStreetMap, Tiles de OSM-Ar #2'});
+    osmar = L.tileLayer('http://tiles.openstreetmap.org.ar/{s}/osm-ar/{z}/{x}/{y}.png', { attribution: 'Datos © Colaboradores de OpenStreetMap, Tiles de OSM-Ar'});
+    osmarh = L.tileLayer('http://tiles.openstreetmap.org.ar/{s}/osm-ar-dev/{z}/{x}/{y}.png', { attribution: 'Datos © Colaboradores de OpenStreetMap, Tiles de OSM-Ar #2'});
+    osmardev = L.tileLayer('http://tiles.openstreetmap.org.ar/{s}/osm-ar-dev/{z}/{x}/{y}.png', { attribution: 'Datos © Colaboradores de OpenStreetMap, Tiles de OSM-Ar #2'});
     osm = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© Colaboradores de OpenStreetMap'});
     satelite = L.tileLayer('http://{s}.tiles.mapbox.com/v3/fernando.iaekoeef/{z}/{x}/{y}.png', { attribution: '- Tiles: © Mapbox'});
     baseLayers = {
