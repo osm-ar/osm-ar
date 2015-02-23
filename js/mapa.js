@@ -50,12 +50,12 @@ $(document).ready(function (){
                 var date = new Date(repo.pushed_at);
                 var pushed_at = (date.getDate() + '-' + date.getMonth()+1) + '-' + date.getFullYear();
                 $('.github-widget').html('');
-                $('.github-widget').append('<h4>Github Repo</h4><div><a class="repo" href="' + repo.url.replace('api.','').replace('repos/','') + '">' + repo.url.replace('api.','').replace('repos/','') + '</a></div>');
+                $('.github-widget').append('<h4>Github Repo</h4><div><a class="repo" target="_blank"  href="' + repo.url.replace('api.','').replace('repos/','') + '">' + repo.url.replace('api.','').replace('repos/','') + '</a></div>');
                 $('.github-widget').append('<h5 class="">Watchers: <a class="badge watchers" href="' + repo.url.replace('api.','').replace('repos/','') + '/watchers">' + repo.watchers + '</a></h5>');
                 $('.github-widget').append('<h5 class="">Forks: <a class="badge forks" href="' + repo.url.replace('api.','').replace('repos/','') + '/forks">' + repo.forks + '</a></h5>');
                 $('.github-widget').append('<div><a class="btn btn-inverse download" href="' + repo.url.replace('api.','').replace('repos/','') + '/zipball/master">Descargar en zip</a></div>');
                 $('.github-widget').append('<p>Ultimo commit al branch <strong>master</strong> el día ' + pushed_at + '</p>');
-                $('.github-widget').append('<p>Reportar problemas, sugerir mejoras: <a href="https://github.com/osm-ar/osm-ar/issues">https://github.com/osm-ar/osm-ar/issues</a></p>');
+                $('.github-widget').append('<p>Reportar problemas, sugerir mejoras: <a target="_blank" href="https://github.com/osm-ar/osm-ar/issues">https://github.com/osm-ar/osm-ar/issues</a></p>');
                 
             } 
         });
